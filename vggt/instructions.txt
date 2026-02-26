@@ -1,0 +1,43 @@
+Instructions for running VGGT with the rose gebru server
+
+After cloning the repo and ssh-ing into the rose server a virtual environment is necessary to install the packages
+I used the uv tool, which can be downloaded like this:
+
+> curl -LsSf https://astral.sh/uv/install.sh | sh
+
+to create the vitual environment: 
+> uv venv
+> source .venv/bin/activate
+
+then I used this to download all the necessary dependencies
+> uv pip install -r requirements.txt
+> uv pip install -r requirements_demo.txt
+
+then I used this command to forward a port, allowing me to open the web demo own my own computer:
+python demo_gradio.py --server_name 0.0.0.0 --server_port 8080
+
+I then followed the VS code prompt to the ports tab and opened the application
+
+From there I uploaded the photos as described in thw README and tried to reconstruct
+
+I also tried to do the basic convention from the readme, along these lines:
+
+import torch
+from vggt.models.vggt import VGGT
+from vggt.utils.load_fn import load_and_preprocess_images
+
+device = "cuda" if torch.cuda.is_available() else "cpu"
+model = VGGT.from_pretrained("facebook/VGGT-1B").to(device)
+
+image_names = [
+    "my_scene/images/img1.jpg",
+    "my_scene/images/img2.jpg",
+    "my_scene/images/img3.jpg",
+]
+
+images = load_and_preprocess_images(image_names).to(device)
+
+with torch.no_grad():
+    predictions = model(images)
+
+I did not end up getting an output due to unknown reasons
