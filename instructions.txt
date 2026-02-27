@@ -1,0 +1,39 @@
+Instructions for running VGGT with the rose gebru server
+
+Note: All files except instruction.txt and the generate_preds.py are from the VGGT repo and licensed as per the LICENSE.txt file
+
+After cloning the repo and ssh-ing into the rose server a virtual environment is necessary to 
+install the package dependencies outlined in this project
+
+I used the uv tool, which can be downloaded like this:
+> curl -LsSf https://astral.sh/uv/install.sh | sh
+
+To create and run the vitual environment: 
+> uv venv
+> source .venv/bin/activate
+
+Then use pip to install the required dependencies like so:
+> uv pip install -r requirements.txt
+> uv pip install -r requirements_demo.txt
+
+## TASK 1: gradio demo ##
+
+The VGGT repo comes with an option to demo 3D environments using a local host browser, 
+which was used to gather data and images for the write-up
+
+Note: This was a somewhat backwards process, where photos were uploaded on my computer, 
+sent to server to make predictions, and sent back to my computer to make 3D render. 
+However, testing gradio is a good way to get novel data to share
+
+Use this command to forward a port, allowing you to open the web demo own your own computer:
+> python demo_gradio.py --server_name 0.0.0.0 --server_port 8080
+
+Then follow the VS code prompt, or check the ports tab, to run the application
+
+From there uploaded the photos and reconstruct
+
+## TASK 2: simple model prediction ##
+
+In order to run the code to generate raw predictions for run code similar to in the file generate_preds.py
+
+Note: these file paths are for images not uploaded to the repo, so the paths and strucuture may need to be changed
